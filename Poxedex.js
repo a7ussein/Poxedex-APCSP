@@ -1,16 +1,26 @@
 /*
-* The purpose of this program is to imitate the behavior of a Poxedex
+* The purpose of this program is to imitate the behavior of a "Kanto Region Poxedex"
 * Coded by:
 *       Ahmed
 *       Colin 
 *       Nio
 */
 
+/*it is to be noted that every pokemon from 1-151 are individual and different from one another in respects of:
+*name
+*type
+*species
+*secondary type
+*each pokemon has a unique attribute or combination of types,
+* therefor the writing of all 151 pokemons attributes is necessary
+*/
+
+//color variables and option of 2 color variables toggle introduced
 var BackColor1;
 var BackColor2ask;
 var BackColor2 ;
 
-// DataBase:
+// DataBase:Names
 var  pokemonNames = [
   "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie",
   "Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate",
@@ -26,10 +36,10 @@ var  pokemonNames = [
   "Starmie", "Mr. Mime", "Scyther", "Jynx", "Electabuzz", "Magmar", "Pinsir", "Tauros", "Magikarp", "Gyarados",
   "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon","Porygon", "Omanyte", "Omastar","Kabuto", "Kabutops", "Aerodactyl", "Snorlax",
   "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"];
-  
+// DataBase: primary types of each pokemon
 var primary = ["grass", "grass", "grass", "fire", "fire", "fire", "water", "water", "water", "bug", "bug", "bug", "bug", "bug", "bug",
     "normal", "normal", "normal", "normal", "normal", "normal", "normal", "poison", "poison", "electric", "electric", "ground", "ground",
-    "poison", "poison", "poison", "poison", "poison", "poison", "fairy", "fairy", "fairy", "fire", "fire", "normal", "normal", "poison",
+    "poison", "poison", "poison", "poison", "poison", "poison", "fairy", "fairy", "fire", "fire", "normal", "normal", "poison",
     "poison", "grass", "grass", "grass", "bug", "bug", "bug", "bug", "ground", "ground", "normal", "normal", "water", "water","fighting",
     "fighting","fire","fire","water","water","water","psychic","psychic","psychic","fighting","fighting","fighting","grass","grass","grass",
     "water","water","rock","rock","rock","fire","fire","water","water", "electric","electric","normal","noraml","normal","water","water",
@@ -37,7 +47,7 @@ var primary = ["grass", "grass", "grass", "fire", "fire", "fire", "water", "wate
     "ground","ground","fighting","fighting","normal","poison","poison","ground","ground","normal","grass","normal","water","water","water","water",
     "water","water","psychic","bug","ice","electric","fire","bug","normal","water","water","water","normal","normal","water","electric","fire",
     "normal","rock","rock","rock","rock","rock","normal","ice","electric","fire","dragon","dragon","dragon","psychic","psychic"];
-    
+// DataBase: species title of each pokemon
 var species= ["the seed pokemon", "the seed pokemon", "the seed pokemon", "the lizard pokemon",
     "the flame pokemon", "the flame pokemon", "the tiny turtle pokemon", "the turtle pokemon",
     "the shellfish pokemon", "the worm pokemon", "the cocoon pokemon", "the butterfly pokemon",
@@ -75,13 +85,33 @@ var species= ["the seed pokemon", "the seed pokemon", "the seed pokemon", "the l
     "the fossil pokemon", "the sleeping pokemon", "the freeze pokemon", "the electric pokemon", 
     "the flame pokemon", "the dragon pokemon", "the dragon pokemon", "the dragon pokemon",
     "the genetic pokemon", "the new species pokemon"];
+//we use null as an easier way to signify that a pokemon does not have a secondary type
+var nu="null";
+//DataBase: secondary types of each pokemon
+var secondary =["poison", "poison", "poison", nu, nu, "flying",nu,nu,nu,nu,nu,
+"flying","poison","poison","poison","flying","flying","flying",nu,nu,"flying","flying",nu,nu,
+nu,nu,nu,nu,nu,nu,"ground",nu,nu,"ground",nu,nu,nu,nu,"fairy","fairy","flying","flying",
+"poison","poison","poison","grass","grass","poison","poison",nu,nu,nu,nu,nu,nu,nu,nu,nu,nu,nu,nu,"fighting",
+nu,nu,nu,nu,nu,nu,"poison","poison","poison","poison","poison","ground","ground","ground",nu,nu,"psychic",
+"psychic","steel","steel","flying","flying","flying",nu,"ice",nu,nu,nu,"ice","poison","poison","poison",
+"ground",nu,nu,nu,nu,nu,nu,"psychic","psychic",nu,nu,nu,nu,nu,nu,nu,"rock","rock",nu,nu,nu,nu,nu,nu,nu,nu,
+"psychic","fairy","flying","psychic",nu,nu,nu,nu,nu,"flying","ice",nu,nu,nu,nu,nu,nu,"water",
+"water","water","water","flying",nu,"flying","flying","flying",nu,nu,"flying"];
     
-var secondary =["poison", "poison", "poison", "null", "null", "flying"];
-    
-var yesOrNo = ["y","y","y","n","n","y"];
+// this is called in the "Pokecolor" function below to determine whether or not a pokemon has a second type using "null"
+var yesOrNo = [];
+var x = secondary.length
+for (var i = 0; i<x; i++){
+    if(secondary[i]=="null"){
+        yesOrNo.push("n")
+    } else{
+        yesOrNo.push("y")
+    }
+}
 
-
-//Functions
+//Functions: Category - This takes the number from 1-151 that is asked to the user and the array of pokemon names to 
+// print out the name, species, and pokedex number of the pokemon onto the provided screen. 
+// relies on array "pokemonNames" and "species"
 function Category(num, pokemonNames){
         var text = new Text(pokemonNames[num - 1]);
         var text2 = new Text(species[num - 1], "12pt arial");
@@ -93,7 +123,8 @@ function Category(num, pokemonNames){
         text.setPosition(110, 190);
         add(text);
 }
-
+//Functions: PokeColor - This takes a number, uses the various arrays below to find their values,
+// and assigns them their types name in text
 function PokeColor(x){
     BackColor1 = primary[x-1];
     BackColor2ask = yesOrNo[x-1];
@@ -102,9 +133,9 @@ function PokeColor(x){
     return BackColor2ask;
     return BackColor2;
     }
-    
+    //the start function - where everything is put together and called
 function start(){
-    var num = readInt("Choose a number from 1-150 ");
+    var num = readInt("Choose a number from 1-151");
     
     // safety error message cuz why not? :>
     for(var i = 0; i < 1; i++){
@@ -119,8 +150,8 @@ function start(){
     
     PokeColor(num)
     
-    //time for the pokemon typing background color
-    //listing colors to types
+    //listing colors to types, this translates the type names in text from Pokecolor into color values which are
+    // printed on the screen in variables back block 1 and 2 below
     if (BackColor1 == "water") {
         BackColor1 = "#6390F0";
     } else if (BackColor1 == "fire") {
@@ -160,9 +191,9 @@ function start(){
     }
    
   //------------------------------------------------------------------------------------------
-    //var BackColor2ask = readLine("does the pokemon have a secondary type? y/n ");
+    //
     if (BackColor2ask == "y") {
-        //var BackColor2 = readLine("what is the pokemons secondary type color? (please dont capitalize) ");
+        //secondary colors listed for BackColor2
             if (BackColor2 == "water") {
                     BackColor2 = "#6390F0";
                 } else if (BackColor2 == "fire") {
@@ -200,6 +231,9 @@ function start(){
                 } else if (BackColor2 == "fairy") {
                     BackColor2 = "#D685AD";
                 }
+                
+        //this area of code below creates and adds the color of the primary type, checks for the pokemons second type,
+        // then if there is a second type, splits the background to display both colors.
         var backBlock2 = new Rectangle(getWidth()/2, getHeight());
         backBlock2.setColor(BackColor2);
         backBlock2.move(+getWidth()/2, 0);
@@ -211,6 +245,9 @@ function start(){
     var backBlock1 = new Rectangle(bB1W, getHeight());
     backBlock1.setColor(BackColor1);
     add(backBlock1);
+    //--------------------------------------------------------------------------
+    
+    //below is the graphics part of the project to make it look nice------------
     
     //back index
     var rbBar = new Rectangle(20, getHeight());
@@ -319,12 +356,12 @@ function start(){
         bary = bary + 5
         add(bar);
     }
+//------------------------------------------------------------------------------
 
-
-  
+  //the Category function is called within the start function to place the names on top of the graphics displayed
 Category(num, pokemonNames);
 
 }
-
+//end of start function
 
 
