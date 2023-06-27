@@ -1,9 +1,9 @@
 /*
 * The purpose of this program is to imitate the behavior of a "Kanto Region Poxedex"
 * Coded by:
-*       Ahmed
-*       Colin 
-*       Nio
+*       student1 = Ahmed Hussein
+*       student2 = CZ
+*       student3 = Jone Fatone (Nio)
 */
 
 /*it is to be noted that every pokemon from 1-151 are individual and different from one another in respects of:
@@ -20,7 +20,8 @@ var BackColor1;
 var BackColor2ask;
 var BackColor2 ;
 
-// DataBase:Names
+// DataBase:Names 
+// Coded by: JAF & AH
 var  pokemonNames = [
   "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie",
   "Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate",
@@ -37,6 +38,7 @@ var  pokemonNames = [
   "Lapras", "Ditto", "Eevee", "Vaporeon", "Jolteon", "Flareon","Porygon", "Omanyte", "Omastar","Kabuto", "Kabutops", "Aerodactyl", "Snorlax",
   "Articuno", "Zapdos", "Moltres", "Dratini", "Dragonair", "Dragonite", "Mewtwo", "Mew"];
 // DataBase: primary types of each pokemon
+// Coded by: JAF
 var primary = ["grass", "grass", "grass", "fire", "fire", "fire", "water", "water", "water", "bug", "bug", "bug", "bug", "bug", "bug",
     "normal", "normal", "normal", "normal", "normal", "normal", "normal", "poison", "poison", "electric", "electric", "ground", "ground",
     "poison", "poison", "poison", "poison", "poison", "poison", "fairy", "fairy", "fire", "fire", "normal", "normal", "poison",
@@ -48,6 +50,7 @@ var primary = ["grass", "grass", "grass", "fire", "fire", "fire", "water", "wate
     "water","water","psychic","bug","ice","electric","fire","bug","normal","water","water","water","normal","normal","water","electric","fire",
     "normal","rock","rock","rock","rock","rock","normal","ice","electric","fire","dragon","dragon","dragon","psychic","psychic"];
 // DataBase: species title of each pokemon
+// Coded by: CZ
 var species= ["the seed pokemon", "the seed pokemon", "the seed pokemon", "the lizard pokemon",
     "the flame pokemon", "the flame pokemon", "the tiny turtle pokemon", "the turtle pokemon",
     "the shellfish pokemon", "the worm pokemon", "the cocoon pokemon", "the butterfly pokemon",
@@ -86,8 +89,10 @@ var species= ["the seed pokemon", "the seed pokemon", "the seed pokemon", "the l
     "the flame pokemon", "the dragon pokemon", "the dragon pokemon", "the dragon pokemon",
     "the genetic pokemon", "the new species pokemon"];
 //we use null as an easier way to signify that a pokemon does not have a secondary type
+// Coded by: JAF
 var nu="null";
 //DataBase: secondary types of each pokemon
+// Coded by: JAF & AH & CZ
 var secondary =["poison", "poison", "poison", nu, nu, "flying",nu,nu,nu,nu,nu,
 "flying","poison","poison","poison","flying","flying","flying",nu,nu,"flying","flying",nu,nu,
 nu,nu,nu,nu,nu,nu,"ground",nu,nu,"ground",nu,nu,nu,nu,"fairy","fairy","flying","flying",
@@ -99,6 +104,7 @@ nu,nu,nu,nu,nu,nu,"poison","poison","poison","poison","poison","ground","ground"
 "water","water","water","flying",nu,"flying","flying","flying",nu,nu,"flying"];
     
 // this is called in the "Pokecolor" function below to determine whether or not a pokemon has a second type using "null"
+// Coded by: JAF
 var yesOrNo = [];
 var x = secondary.length
 for (var i = 0; i<x; i++){
@@ -112,6 +118,7 @@ for (var i = 0; i<x; i++){
 //Functions: Category - This takes the number from 1-151 that is asked to the user and the array of pokemon names to 
 // print out the name, species, and pokedex number of the pokemon onto the provided screen. 
 // relies on array "pokemonNames" and "species"
+// Coded over time by: JAF & AH & CZ
 function Category(num, pokemonNames){
         var text = new Text(pokemonNames[num - 1]);
         var text2 = new Text(species[num - 1], "12pt arial");
@@ -125,6 +132,7 @@ function Category(num, pokemonNames){
 }
 //Functions: PokeColor - This takes a number, uses the various arrays below to find their values,
 // and assigns them their types name in text
+// Coded over time by: JAF & AH & CZ
 function PokeColor(x){
     BackColor1 = primary[x-1];
     BackColor2ask = yesOrNo[x-1];
@@ -138,6 +146,7 @@ function start(){
     var num = readInt("Choose a number from 1-151");
     
     // safety error message cuz why not? :>
+    // Coded by: AH
     for(var i = 0; i < 1; i++){
     if(num > 151 || num <1){
         num = readInt("Invalid input, Choose a number from 1-151 ");
@@ -152,6 +161,7 @@ function start(){
     
     //listing colors to types, this translates the type names in text from Pokecolor into color values which are
     // printed on the screen in variables back block 1 and 2 below
+    // Coded by: JAF
     if (BackColor1 == "water") {
         BackColor1 = "#6390F0";
     } else if (BackColor1 == "fire") {
@@ -194,6 +204,7 @@ function start(){
     //
     if (BackColor2ask == "y") {
         //secondary colors listed for BackColor2
+        // Coded by: JAF & AH
             if (BackColor2 == "water") {
                     BackColor2 = "#6390F0";
                 } else if (BackColor2 == "fire") {
@@ -234,6 +245,7 @@ function start(){
                 
         //this area of code below creates and adds the color of the primary type, checks for the pokemons second type,
         // then if there is a second type, splits the background to display both colors.
+        // Coded by: JAF
         var backBlock2 = new Rectangle(getWidth()/2, getHeight());
         backBlock2.setColor(BackColor2);
         backBlock2.move(+getWidth()/2, 0);
@@ -248,7 +260,7 @@ function start(){
     //--------------------------------------------------------------------------
     
     //below is the graphics part of the project to make it look nice------------
-    
+    // Graphics coded by: JAF & CZ
     //back index
     var rbBar = new Rectangle(20, getHeight());
     rbBar.setPosition(getWidth()-20, 0);
@@ -333,13 +345,13 @@ function start(){
     screenCase.setColor("#dedede");
     add(screenCase);
     
-    //the screen to display on
+    //the smaller screen to display pokemon details on
     var screen = new Rectangle(200, 150);
     screen.setPosition(100, 160);
     screen.setColor("#50ad5d");
     add(screen);
     
-    //detailing
+    //detailing on the screen
     var dotRB2 = new Circle(9);
     dotRB2.setPosition(120, 325);
     add(dotRB2);
